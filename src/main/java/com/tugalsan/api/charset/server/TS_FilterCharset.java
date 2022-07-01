@@ -1,7 +1,6 @@
 package com.tugalsan.api.charset.server;
 
 import com.tugalsan.api.unsafe.client.*;
-import java.io.*;
 import javax.servlet.*;
 import javax.servlet.annotation.*;
 
@@ -40,9 +39,8 @@ public class TS_FilterCharset implements Filter {
                 response.setContentType("text/html; charset=UTF-8");
             }
             response.setCharacterEncoding("UTF-8");
-
             next.doFilter(request, response);
-        });
+        }, e -> TGS_UnSafe.execute(() -> next.doFilter(request, response)));
     }
 
     @Override
