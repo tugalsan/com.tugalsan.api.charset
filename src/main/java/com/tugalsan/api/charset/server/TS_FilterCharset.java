@@ -1,5 +1,6 @@
 package com.tugalsan.api.charset.server;
 
+import com.tugalsan.api.unsafe.client.*;
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.annotation.*;
@@ -15,30 +16,33 @@ public class TS_FilterCharset implements Filter {
     private String encoding;
 
     @Override
-    public void init(FilterConfig config) throws ServletException {
-        encoding = config.getInitParameter("requestEncoding");
-        if (encoding == null) {
-            encoding = "UTF-8";
-        }
+    public void init(FilterConfig config) {
+        TGS_UnSafe.execute(() -> {
+            encoding = config.getInitParameter("requestEncoding");
+            if (encoding == null) {
+                encoding = "UTF-8";
+            }
+        });
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain next)
-            throws IOException, ServletException {
-        // Respect the client-specified character encoding
-        // (see HTTP specification section 3.4.1)
-        if (null == request.getCharacterEncoding()) {
-            request.setCharacterEncoding(encoding);
-        }
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain next) {
+        TGS_UnSafe.execute(() -> {
+            // Respect the client-specified character encoding
+            // (see HTTP specification section 3.4.1)
+            if (null == request.getCharacterEncoding()) {
+                request.setCharacterEncoding(encoding);
+            }
 
-        // Set the default response content type and encoding
-        var contentType = String.valueOf(response.getContentType());
-        if (contentType.startsWith("text/html")) {
-            response.setContentType("text/html; charset=UTF-8");
-        }
-        response.setCharacterEncoding("UTF-8");
+            // Set the default response content type and encoding
+            var contentType = String.valueOf(response.getContentType());
+            if (contentType.startsWith("text/html")) {
+                response.setContentType("text/html; charset=UTF-8");
+            }
+            response.setCharacterEncoding("UTF-8");
 
-        next.doFilter(request, response);
+            next.doFilter(request, response);
+        });
     }
 
     @Override
