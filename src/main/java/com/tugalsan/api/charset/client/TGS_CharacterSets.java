@@ -105,7 +105,7 @@ public class TGS_CharacterSets {
     public static String UTF8() {
         return StandardCharsets.UTF_8.name();
     }
-//    public static String OS (){return  Charset.defaultCharset().name();}//GWT doesnt like that
+//    public static String OS (){return  Charset.defaultCharset().name();}//GWT does not like u; check on 2.10 version again!
 
     public static Charset of(CharSequence charsetName) {
         return Charset.availableCharsets().get(charsetName.toString());
