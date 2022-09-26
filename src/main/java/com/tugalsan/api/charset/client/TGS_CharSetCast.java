@@ -4,15 +4,15 @@ import java.util.Locale;
 
 public class TGS_CharSetCast {
 
-    public static enum Style {
+    public static enum ToStringStyle {
         TURKISH,
         ENGLISH
     }
 
     public static boolean STYLE_TURKISH() {//DOUBLE TO STRING STYLE
-        return CAST_2_STR_STYLE == Style.TURKISH;
+        return CAST_2_STR_STYLE == ToStringStyle.TURKISH;
     }
-    public static Style CAST_2_STR_STYLE = Style.TURKISH;
+    public static ToStringStyle CAST_2_STR_STYLE = ToStringStyle.TURKISH;
 
     public static String toLowerCaseFixed(CharSequence source) {
         return source.toString().toLowerCase(Locale.ROOT);
