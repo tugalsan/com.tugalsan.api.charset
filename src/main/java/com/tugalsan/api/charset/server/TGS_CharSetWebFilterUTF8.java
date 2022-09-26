@@ -1,6 +1,6 @@
 package com.tugalsan.api.charset.server;
 
-import com.tugalsan.api.charset.client.TGS_CharSet;
+import com.tugalsan.api.charset.client.TGS_CharSetUTF8;
 import com.tugalsan.api.log.server.TS_Log;
 import com.tugalsan.api.unsafe.client.*;
 import javax.servlet.*;
@@ -10,19 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 @WebFilter(
         urlPatterns = {"/*"},
         initParams = {
-            @WebInitParam(name = "requestEncoding", value = TGS_CharSet.UTF8)
+            @WebInitParam(name = "requestEncoding", value = TGS_CharSetUTF8.UTF8)
         }
 )
-public class TGS_CharSetWebFilter implements Filter {
+public class TGS_CharSetWebFilterUTF8 implements Filter {
 
-    final private static TS_Log d = TS_Log.of(TGS_CharSetWebFilter.class);
+    final private static TS_Log d = TS_Log.of(TGS_CharSetWebFilterUTF8.class);
 
     @Override
     public void init(FilterConfig config) {
         TGS_UnSafe.execute(() -> {
             encoding = config.getInitParameter("requestEncoding");
             if (encoding == null) {
-                encoding = TGS_CharSet.UTF8;
+                encoding = TGS_CharSetUTF8.UTF8;
             }
         });
     }
@@ -39,11 +39,11 @@ public class TGS_CharSetWebFilter implements Filter {
 
             //REQUEST.HTML
             if (String.valueOf(response.getContentType()).startsWith("text/html")) {
-                response.setContentType("text/html; charset=" + TGS_CharSet.UTF8);
+                response.setContentType("text/html; charset=" + TGS_CharSetUTF8.UTF8);
             }
 
             //RESPONSE
-            response.setCharacterEncoding(TGS_CharSet.UTF8);
+            response.setCharacterEncoding(TGS_CharSetUTF8.UTF8);
 
             //ESCALATE
             next.doFilter(request, response);
