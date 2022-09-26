@@ -5,6 +5,7 @@ import com.tugalsan.api.log.server.TS_Log;
 import com.tugalsan.api.unsafe.client.*;
 import javax.servlet.*;
 import javax.servlet.annotation.*;
+import javax.servlet.http.HttpServletRequest;
 
 @WebFilter(
         urlPatterns = {"/*"},
@@ -15,7 +16,6 @@ import javax.servlet.annotation.*;
 public class TGS_CharSetWebFilter implements Filter {
 
     final private static TS_Log d = TS_Log.of(TGS_CharSetWebFilter.class);
-
 
     @Override
     public void init(FilterConfig config) {
@@ -49,7 +49,11 @@ public class TGS_CharSetWebFilter implements Filter {
             next.doFilter(request, response);
         }, e -> {
             if (e.getClass().getName().equals("org.apache.catalina.connector.ClientAbortException")) {
-                d.cr("doFilter", "CLIENT GAVE UP", e.getMessage());
+                if (request instanceof HttpServletRequest hsr) {
+                    d.cr("doFilter", "CLIENT GAVE UP", e.getMessage(), hsr.getRequestURL().toString(), hsr.getQueryString());
+                } else {
+                    d.cr("doFilter", "CLIENT GAVE UP", e.getMessage());
+                }
                 return;
             }
             TGS_UnSafe.execute(() -> next.doFilter(request, response));//ESCALATE WITHOUT DEF_CHARSET
