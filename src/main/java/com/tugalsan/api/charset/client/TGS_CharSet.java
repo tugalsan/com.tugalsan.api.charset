@@ -3,7 +3,11 @@ package com.tugalsan.api.charset.client;
 import java.nio.charset.*;
 import java.util.*;
 
-public class TGS_CharacterSets {
+public class TGS_CharSet {
+
+    final public static String UTF8 = "UTF-8";
+//    public static String UTF8() {return StandardCharsets.UTF_8.name();}//STATIC NEEDED FOR TGS_CharSetWebFilter
+//    public static String OS (){return  Charset.defaultCharset().name();}//GWT does not like u; check on 2.10 version again!
 
 //    public static String UTF8_DISTINCT (){return  "◐";}
 //    public static String UTF8_STAR (){return  "☆";}
@@ -101,11 +105,6 @@ public class TGS_CharacterSets {
     public static String IBM_TURKISH() {
         return "Cp857";
     }
-
-    public static String UTF8() {
-        return StandardCharsets.UTF_8.name();
-    }
-//    public static String OS (){return  Charset.defaultCharset().name();}//GWT does not like u; check on 2.10 version again!
 
     public static Charset of(CharSequence charsetName) {
         return Charset.availableCharsets().get(charsetName.toString());
