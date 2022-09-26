@@ -50,7 +50,7 @@ public class TGS_CharSetWebFilterUTF8 implements Filter {
         }, e -> {
             if (e.getClass().getName().equals("org.apache.catalina.connector.ClientAbortException")) {
                 if (request instanceof HttpServletRequest hsr) {
-                    d.cr("doFilter", "CLIENT GAVE UP", e.getMessage(), hsr.getRequestURL().toString(), hsr.getQueryString());
+                    d.cr("doFilter", "CLIENT GAVE UP", e.getMessage(), hsr.getRequestURL().toString() + "?" + hsr.getQueryString());
                 } else {
                     d.cr("doFilter", "CLIENT GAVE UP", e.getMessage());
                 }
