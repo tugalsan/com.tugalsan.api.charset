@@ -5,8 +5,8 @@ import java.util.Locale;
 //ISSUE: https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html#toLowerCase()
 //ISSUE: https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html#toLowerCase()
 public class TGS_CharSetCast {
-    final public static boolean TURKISH = Locale.getDefault().getDisplayCountry().equals("Türkiye")
-            && Locale.getDefault().getDisplayName().equals("Türkçe (Türkiye)");
+
+    final public static boolean TURKISH = Locale.getDefault().getLanguage().equals("tr");
 
     public static String toLowerCase(CharSequence source) {
         return TURKISH
