@@ -12,8 +12,4 @@ public class TGS_CharSet {
     public static Charset of(CharSequence charsetName) {
         return Charset.availableCharsets().get(charsetName.toString());
     }
-
-    public static String to(CharSequence source, Charset sourceCharset, Charset destCharset) {
-        return new String(source.toString().getBytes(sourceCharset), destCharset);
-    }
 }
