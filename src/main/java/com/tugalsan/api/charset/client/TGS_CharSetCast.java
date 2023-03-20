@@ -8,7 +8,7 @@ public class TGS_CharSetCast {
     /*
         GWT    SIDE INIT: TURKISH = TGC_CharSetUtils.localeTurkish();
         SERVER SIDE INIT: TURKISH = TS_CharSetUtils.localeTurkish();
-    */
+     */
     public static boolean TURKISH = true;
 
     //ISSUE: https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html#toLowerCase()
@@ -23,6 +23,10 @@ public class TGS_CharSetCast {
         return TURKISH
                 ? source.toString().toUpperCase(Locale.ROOT)
                 : source.toString().toUpperCase();
+    }
+
+    public static boolean equalsLocaleIgnoreCase(CharSequence item0, CharSequence item1) {
+        return toLocaleUpperCase(item0).equals(toLocaleUpperCase(item1));
     }
 
     public static String to(CharSequence source, Charset sourceCharset, Charset destCharset) {
