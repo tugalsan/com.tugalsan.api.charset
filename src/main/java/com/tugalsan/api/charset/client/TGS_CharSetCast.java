@@ -29,7 +29,7 @@ public class TGS_CharSetCast {
         return toLocaleUpperCase(item0).equals(toLocaleUpperCase(item1));
     }
 
-    public static boolean contains(CharSequence fullContent, CharSequence searchTag) {
+    public static boolean containsLocaleIgnoreCase(CharSequence fullContent, CharSequence searchTag) {
         return TGS_CharSetCast.toLocaleUpperCase(fullContent).contains(TGS_CharSetCast.toLocaleUpperCase(searchTag));
     }
 
