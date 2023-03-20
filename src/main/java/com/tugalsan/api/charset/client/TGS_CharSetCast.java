@@ -6,8 +6,8 @@ import java.util.Locale;
 public class TGS_CharSetCast {
 
     /*
-        GWT SIDE: TGC_CharSetUtils.localeTurkish();
-        SERVER SIDE: TS_CharSetUtils.localeTurkish();
+        GWT    SIDE INIT: TURKISH = TGC_CharSetUtils.localeTurkish();
+        SERVER SIDE INIT: TURKISH = TS_CharSetUtils.localeTurkish();
     */
     public static boolean TURKISH = true;
 
