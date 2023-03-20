@@ -12,14 +12,14 @@ public class TGS_CharSetCast {
     public static boolean TURKISH = true;
 
     //ISSUE: https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html#toLowerCase()
-    public static String toLowerCase(CharSequence source) {
+    public static String toLocaleLowerCase(CharSequence source) {
         return TURKISH
                 ? source.toString().toLowerCase(Locale.ROOT)
                 : source.toString().toLowerCase();
     }
 
     //ISSUE: https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html#toUpperCase()
-    public static String toUpperCase(CharSequence source) {
+    public static String toLocaleUpperCase(CharSequence source) {
         return TURKISH
                 ? source.toString().toUpperCase(Locale.ROOT)
                 : source.toString().toUpperCase();
