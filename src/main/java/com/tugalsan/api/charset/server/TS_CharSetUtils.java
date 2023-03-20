@@ -11,4 +11,8 @@ public class TS_CharSetUtils {
     public static boolean localeTurkish() {
         return localeLanguage().equals("tr");
     }
+
+    public static void setDefaultLocaleToTurkish() {
+        Locale.forLanguageTag("tr-TR");
+    }
 }
