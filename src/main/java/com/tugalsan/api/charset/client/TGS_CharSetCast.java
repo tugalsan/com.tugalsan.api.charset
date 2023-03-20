@@ -29,6 +29,10 @@ public class TGS_CharSetCast {
         return toLocaleUpperCase(item0).equals(toLocaleUpperCase(item1));
     }
 
+    public static boolean contains(CharSequence fullContent, CharSequence searchTag) {
+        return TGS_CharSetCast.toLocaleUpperCase(fullContent).contains(TGS_CharSetCast.toLocaleUpperCase(searchTag));
+    }
+
     public static String to(CharSequence source, Charset sourceCharset, Charset destCharset) {
         return new String(source.toString().getBytes(sourceCharset), destCharset);
     }
