@@ -54,7 +54,7 @@ public class TGS_CharSetCast {
         if (fullContent != null && searchTag == null) {
             return false;
         }
-        return TGS_CharSetCast.toLocaleUpperCase(fullContent).contains(TGS_CharSetCast.toLocaleUpperCase(searchTag));
+        return toLocaleUpperCase(fullContent).contains(toLocaleUpperCase(searchTag));
     }
 
     public static String to(CharSequence source, Charset sourceCharset, Charset destCharset) {
