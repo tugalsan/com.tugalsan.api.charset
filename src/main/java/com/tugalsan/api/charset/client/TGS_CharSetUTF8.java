@@ -2,13 +2,19 @@ package com.tugalsan.api.charset.client;
 
 public class TGS_CharSetUTF8 {
 
+    public static String UTF8_INCOMPLETE() {
+        return "░"; // U+2591 Unicode Character
+    }
+
+    public static String UTF8_COMPLETE() {
+        return "█"; // // U+2588 Unicode Character
+    }
+
     final public static String UTF8 = "UTF-8";
 //    public static String UTF8_StandardCharsets() {return StandardCharsets.UTF_8.name();}//STATIC NEEDED FOR TGS_CharSetWebFilter
 //    public static String UTF8_OS (){return  Charset.defaultCharset().name();}//GWT does not like u; check on 2.10 version again!
-    
-    
-    
-     //    public static String UTF8_DISTINCT (){return  "◐";}
+
+    //    public static String UTF8_DISTINCT (){return  "◐";}
 //    public static String UTF8_STAR (){return  "☆";}
 //    public static String UTF8_EMAILSEND (){return  "📩";}
 //    public static String UTF8_BROOM (){return  "🧹";}
@@ -67,7 +73,7 @@ public class TGS_CharSetUTF8 {
 //    public static String UTF8_REFRESH (){return  "⟳";}
 //    public static String UTF8_REPORTS (){return  "📈";}
 //    public static String UTF8_FILE_CABINET (){return  "🗄";}
-//    public static String UTF8_PAPER_TEXT (){return  "🗎";}
+//    public static String UTF8_PAPER_TEXT (){return  "?";}
 //    public static String UTF8_PAPER_DOUBLE (){return  "🗟";}
 //    public static String UTF8_GLASSES (){return  "👓";}
 //    public static String UTF8_CHECK (){return  "✔";}
