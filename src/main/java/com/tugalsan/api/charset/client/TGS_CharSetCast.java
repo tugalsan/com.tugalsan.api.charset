@@ -6,8 +6,8 @@ import java.util.Locale;
 public class TGS_CharSetCast {
 
     /*
-        GWT    SIDE INIT: TURKISH = TGC_CharSetUtils.localeTurkish();
-        SERVER SIDE INIT: TURKISH = TS_CharSetUtils.localeTurkish();
+        GWT    SIDE INIT: TGS_CharSetCast.LOCALE2CAST = TGC_CharSetUtils.localeTurkish() ? TGS_CharSetCast.Locale2Cast.TURKISH : TGS_CharSetCast.Locale2Cast.OTHER;
+        SERVER SIDE INIT: TGS_CharSetCast.LOCALE2CAST = TS_CharSetUtils.localeTurkish()  ? TGS_CharSetCast.Locale2Cast.TURKISH : TGS_CharSetCast.Locale2Cast.OTHER;
      */
     public static enum Locale2Cast {
         TURKISH, OTHER
