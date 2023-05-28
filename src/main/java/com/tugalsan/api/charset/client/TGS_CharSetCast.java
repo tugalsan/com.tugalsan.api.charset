@@ -13,7 +13,7 @@ public class TGS_CharSetCast {
         TURKISH, OTHER
     }
 
-    public static Locale2Cast LOCALE2CAST  = Locale2Cast.TURKISH;
+    public static Locale2Cast LOCALE2CAST = Locale2Cast.TURKISH;
 
     //ISSUE: https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html#toLowerCase()
     public static String toLocaleLowerCase(CharSequence source) {
@@ -59,6 +59,32 @@ public class TGS_CharSetCast {
             return false;
         }
         return toLocaleUpperCase(fullContent).contains(toLocaleUpperCase(searchTag));
+    }
+
+    public static boolean endsWithLocaleIgnoreCase(CharSequence fullContent, CharSequence endsWithTag) {
+        if (fullContent == null && endsWithTag == null) {
+            return true;
+        }
+        if (fullContent == null && endsWithTag != null) {
+            return false;
+        }
+        if (fullContent != null && endsWithTag == null) {
+            return false;
+        }
+        return toLocaleUpperCase(fullContent).endsWith(toLocaleUpperCase(endsWithTag));
+    }
+
+    public static boolean startsWithLocaleIgnoreCase(CharSequence fullContent, CharSequence startsWithTag) {
+        if (fullContent == null && startsWithTag == null) {
+            return true;
+        }
+        if (fullContent == null && startsWithTag != null) {
+            return false;
+        }
+        if (fullContent != null && startsWithTag == null) {
+            return false;
+        }
+        return toLocaleUpperCase(fullContent).startsWith(toLocaleUpperCase(startsWithTag));
     }
 
     public static String to(CharSequence source, Charset sourceCharset, Charset destCharset) {
