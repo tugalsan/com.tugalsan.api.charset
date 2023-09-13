@@ -1,5 +1,6 @@
 package com.tugalsan.api.charset.server;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 
 public class TS_CharSetUtils {
@@ -14,5 +15,20 @@ public class TS_CharSetUtils {
 
     public static void setDefaultLocaleToTurkish() {
         Locale.forLanguageTag("tr-TR");
+    }
+
+    public static boolean isASCIIPrintable(CharSequence text) {
+        return text.codePoints().allMatch(c -> c > 31 && c < 127);
+    }
+
+    public static boolean isASCII(CharSequence text) {
+        return StandardCharsets.US_ASCII.newEncoder().canEncode(text);
+    }
+
+    public static String makePrintable(CharSequence text) {
+        if (text == null) {
+            return "";
+        }
+        return text.toString().replaceAll("\\P{Print}", "");
     }
 }
