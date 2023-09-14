@@ -2,6 +2,7 @@ package com.tugalsan.api.charset.server;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
+import java.util.Objects;
 
 public class TS_CharSetUtils {
 
@@ -30,5 +31,9 @@ public class TS_CharSetUtils {
             return "";
         }
         return text.toString().replaceAll("\\P{Print}", "");
+    }
+
+    public static boolean isPrintable_slow(CharSequence text) {
+        return Objects.equals(text, makePrintable(text));
     }
 }
