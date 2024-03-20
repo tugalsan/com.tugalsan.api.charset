@@ -67,7 +67,8 @@ public class TGS_CharSetCast {
         if (item0 != null && item1 == null) {
             return false;
         }
-        return toLocaleUpperCase(item0).equals(toLocaleUpperCase(item1));
+        return toLocaleUpperCase(item0, skipHiddenLetters).trim()
+                .equals(toLocaleUpperCase(item1, skipHiddenLetters).trim());
     }
 
     public static boolean containsLocaleIgnoreCase(CharSequence fullContent, CharSequence searchTag) {
@@ -88,7 +89,8 @@ public class TGS_CharSetCast {
         if (fullContent != null && searchTag == null) {
             return false;
         }
-        return toLocaleUpperCase(fullContent).contains(toLocaleUpperCase(searchTag));
+        return toLocaleUpperCase(fullContent, skipHiddenLetters).trim()
+                .contains(toLocaleUpperCase(searchTag, skipHiddenLetters).trim());
     }
 
     public static boolean endsWithLocaleIgnoreCase(CharSequence fullContent, CharSequence endsWithTag) {
@@ -96,10 +98,6 @@ public class TGS_CharSetCast {
     }
 
     public static boolean endsWithLocaleIgnoreCase(CharSequence fullContent, CharSequence endsWithTag, boolean skipHiddenLetters) {
-        if (skipHiddenLetters) {
-            fullContent = removeHidden(fullContent);
-            endsWithTag = removeHidden(endsWithTag);
-        }
         if (fullContent == null && endsWithTag == null) {
             return true;
         }
@@ -109,7 +107,8 @@ public class TGS_CharSetCast {
         if (fullContent != null && endsWithTag == null) {
             return false;
         }
-        return toLocaleUpperCase(fullContent).endsWith(toLocaleUpperCase(endsWithTag));
+        return toLocaleUpperCase(fullContent, skipHiddenLetters).trim()
+                .endsWith(toLocaleUpperCase(endsWithTag, skipHiddenLetters).trim());
     }
 
     public static boolean startsWithLocaleIgnoreCase(CharSequence fullContent, CharSequence startsWithTag) {
@@ -117,10 +116,6 @@ public class TGS_CharSetCast {
     }
 
     public static boolean startsWithLocaleIgnoreCase(CharSequence fullContent, CharSequence startsWithTag, boolean skipHiddenLetters) {
-        if (skipHiddenLetters) {
-            fullContent = removeHidden(fullContent);
-            startsWithTag = removeHidden(startsWithTag);
-        }
         if (fullContent == null && startsWithTag == null) {
             return true;
         }
@@ -130,7 +125,8 @@ public class TGS_CharSetCast {
         if (fullContent != null && startsWithTag == null) {
             return false;
         }
-        return toLocaleUpperCase(fullContent).startsWith(toLocaleUpperCase(startsWithTag));
+        return toLocaleUpperCase(fullContent, skipHiddenLetters).trim()
+                .startsWith(toLocaleUpperCase(startsWithTag, skipHiddenLetters).trim());
     }
 
     public static String to(CharSequence source, Charset sourceCharset, Charset destCharset) {
