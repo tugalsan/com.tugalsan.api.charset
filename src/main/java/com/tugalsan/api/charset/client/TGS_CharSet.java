@@ -37,22 +37,22 @@ public class TGS_CharSet {
     public static class OnlyJreHappy {
 
         @GwtIncompatible
-        public static void setDefaultLocaleToTurkish() {
+        public  void setDefaultLocaleToTurkish() {
             Locale.forLanguageTag("tr-TR");
         }
 
         @GwtIncompatible
-        public static boolean isASCIIPrintable(CharSequence text) {
+        public  boolean isASCIIPrintable(CharSequence text) {
             return text.codePoints().allMatch(c -> c > 31 && c < 127);
         }
 
         @GwtIncompatible
-        public static boolean isASCII(CharSequence text) {
+        public  boolean isASCII(CharSequence text) {
             return StandardCharsets.US_ASCII.newEncoder().canEncode(text);
         }
 
         @GwtIncompatible
-        public static String makePrintable(CharSequence text) {
+        public  String makePrintable(CharSequence text) {
             if (text == null) {
                 return "";
             }
@@ -60,7 +60,7 @@ public class TGS_CharSet {
         }
 
         @GwtIncompatible
-        public static boolean isPrintable_slow(CharSequence text) {
+        public  boolean isPrintable_slow(CharSequence text) {
             return Objects.equals(text, makePrintable(text));
         }
     }
