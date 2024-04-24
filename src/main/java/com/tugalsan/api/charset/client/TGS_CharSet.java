@@ -37,11 +37,6 @@ public class TGS_CharSet {
     public static class OnlyJreHappy {
 
         @GwtIncompatible
-        public void setDefaultLocaleToTurkish() {
-            Locale.forLanguageTag("tr-TR");
-        }
-
-        @GwtIncompatible
         public boolean isASCIIPrintable(CharSequence text) {
             return text.codePoints().allMatch(c -> c > 31 && c < 127);
         }
@@ -248,15 +243,17 @@ public class TGS_CharSet {
 
         public void languageSetDefault(Language languageDefault) {
             CommonGwt.languageDefault = languageDefault;
+            Locale.setDefault(languageDefault.locale);
         }
+        private static volatile Language languageDefault = null;
 
         public Language languageDefault() {
             if (languageDefault == null) {
-                languageDefault = localeTurkish() ? languageTurkish() : languageEnglish();
+                var tmp = localeTurkish() ? languageTurkish() : languageEnglish();
+                languageSetDefault(tmp);
             }
             return languageDefault;
         }
-        private static volatile Language languageDefault = null;
 
         public Language languageEnglish() {
             if (languageEnglish == null) {
@@ -268,7 +265,7 @@ public class TGS_CharSet {
 
         public Language languageTurkish() {
             if (languageTurkish == null) {
-                languageTurkish = new Language(Locale.forLanguageTag("tr-TR"));
+                languageTurkish = new Language(Locale.of("tr", "TR"));
             }
             return languageTurkish;
         }
