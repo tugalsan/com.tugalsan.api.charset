@@ -37,22 +37,22 @@ public class TGS_CharSet {
     public static class OnlyJreHappy {
 
         @GwtIncompatible
-        public  void setDefaultLocaleToTurkish() {
+        public void setDefaultLocaleToTurkish() {
             Locale.forLanguageTag("tr-TR");
         }
 
         @GwtIncompatible
-        public  boolean isASCIIPrintable(CharSequence text) {
+        public boolean isASCIIPrintable(CharSequence text) {
             return text.codePoints().allMatch(c -> c > 31 && c < 127);
         }
 
         @GwtIncompatible
-        public  boolean isASCII(CharSequence text) {
+        public boolean isASCII(CharSequence text) {
             return StandardCharsets.US_ASCII.newEncoder().canEncode(text);
         }
 
         @GwtIncompatible
-        public  String makePrintable(CharSequence text) {
+        public String makePrintable(CharSequence text) {
             if (text == null) {
                 return "";
             }
@@ -60,7 +60,7 @@ public class TGS_CharSet {
         }
 
         @GwtIncompatible
-        public  boolean isPrintable_slow(CharSequence text) {
+        public boolean isPrintable_slow(CharSequence text) {
             return Objects.equals(text, makePrintable(text));
         }
     }
@@ -77,6 +77,157 @@ public class TGS_CharSet {
 
     //CommonGwt
     public static class CommonGwt {
+
+        public static class Language {
+
+            public Language(Locale locale) {
+                this.locale = locale;
+            }
+            final private Locale locale;
+
+            public static Language of(Locale locale) {
+                return new Language(locale);
+            }
+
+            //ISSUE: https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html#toLowerCase()
+            public String toLowerCase(CharSequence source) {
+                return toLowerCase(source, false);
+            }
+
+            public String toLowerCase(CharSequence source, boolean removeHiddenLetters) {
+                if (removeHiddenLetters) {
+                    source = TGS_CharSet.cmn().removeHidden(source);
+                }
+                if (source == null) {
+                    return null;
+                }
+                return source.toString().toLowerCase(locale);
+            }
+
+            //ISSUE: https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html#toUpperCase()
+            public String toUpperCase(CharSequence source) {
+                return toUpperCase(source, false);
+            }
+
+            public String toUpperCase(CharSequence source, boolean removeHiddenLetters) {
+                if (removeHiddenLetters) {
+                    source = TGS_CharSet.cmn().removeHidden(source);
+                }
+                if (source == null) {
+                    return null;
+                }
+                return source.toString().toUpperCase(locale);
+            }
+
+            public boolean equalsIgnoreCase(CharSequence item0, CharSequence item1) {
+                return equalsIgnoreCase(item0, item1, true);
+            }
+
+            public boolean equalsIgnoreCase(CharSequence item0, CharSequence item1, boolean skipHiddenLetters) {
+                if (skipHiddenLetters) {
+                    item0 = TGS_CharSet.cmn().removeHidden(item0);
+                    item1 = TGS_CharSet.cmn().removeHidden(item1);
+                }
+                if (item0 == null && item1 == null) {
+                    return true;
+                }
+                if (item0 == null && item1 != null) {
+                    return false;
+                }
+                if (item0 != null && item1 == null) {
+                    return false;
+                }
+                return toUpperCase(item0, skipHiddenLetters).trim()
+                        .equals(toUpperCase(item1, skipHiddenLetters).trim());
+            }
+
+            public boolean containsIgnoreCase(CharSequence fullContent, CharSequence searchTag) {
+                return containsIgnoreCase(fullContent, searchTag, true);
+            }
+
+            public boolean containsIgnoreCase(CharSequence fullContent, CharSequence searchTag, boolean skipHiddenLetters) {
+                if (skipHiddenLetters) {
+                    fullContent = TGS_CharSet.cmn().removeHidden(fullContent);
+                    searchTag = TGS_CharSet.cmn().removeHidden(searchTag);
+                }
+                if (fullContent == null && searchTag == null) {
+                    return true;
+                }
+                if (fullContent == null && searchTag != null) {
+                    return false;
+                }
+                if (fullContent != null && searchTag == null) {
+                    return false;
+                }
+                return toUpperCase(fullContent, skipHiddenLetters).trim()
+                        .contains(toUpperCase(searchTag, skipHiddenLetters).trim());
+            }
+
+            public boolean endsWithIgnoreCase(CharSequence fullContent, CharSequence endsWithTag) {
+                return endsWithIgnoreCase(fullContent, endsWithTag, true);
+            }
+
+            public boolean endsWithIgnoreCase(CharSequence fullContent, CharSequence endsWithTag, boolean skipHiddenLetters) {
+                if (fullContent == null && endsWithTag == null) {
+                    return true;
+                }
+                if (fullContent == null && endsWithTag != null) {
+                    return false;
+                }
+                if (fullContent != null && endsWithTag == null) {
+                    return false;
+                }
+                return toUpperCase(fullContent, skipHiddenLetters).trim()
+                        .endsWith(toUpperCase(endsWithTag, skipHiddenLetters).trim());
+            }
+
+            public boolean startsWithIgnoreCase(CharSequence fullContent, CharSequence startsWithTag) {
+                return startsWithIgnoreCase(fullContent, startsWithTag, true);
+            }
+
+            public boolean startsWithIgnoreCase(CharSequence fullContent, CharSequence startsWithTag, boolean skipHiddenLetters) {
+                if (fullContent == null && startsWithTag == null) {
+                    return true;
+                }
+                if (fullContent == null && startsWithTag != null) {
+                    return false;
+                }
+                if (fullContent != null && startsWithTag == null) {
+                    return false;
+                }
+                return toUpperCase(fullContent, skipHiddenLetters).trim()
+                        .startsWith(toUpperCase(startsWithTag, skipHiddenLetters).trim());
+            }
+
+        }
+
+        public void languageSetDefault(Language languageDefault) {
+            CommonGwt.languageDefault = languageDefault;
+        }
+
+        public Language languageDefault() {
+            if (languageDefault == null) {
+                languageDefault = localeTurkish() ? languageTurkish() : languageEnglish();
+            }
+            return languageDefault;
+        }
+        private static volatile Language languageDefault = null;
+
+        public Language languageEnglish() {
+            if (languageEnglish == null) {
+                languageEnglish = new Language(Locale.ENGLISH);
+            }
+            return languageEnglish;
+        }
+        private static volatile Language languageEnglish = null;
+
+        public Language languageTurkish() {
+            if (languageTurkish == null) {
+                languageTurkish = new Language(Locale.forLanguageTag("tr-TR"));
+            }
+            return languageTurkish;
+        }
+        private static volatile Language languageTurkish = null;
 
         public String localeName() {
             return LocaleInfo.getCurrentLocale().getLocaleName();
