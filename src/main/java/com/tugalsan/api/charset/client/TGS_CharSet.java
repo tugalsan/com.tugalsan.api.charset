@@ -125,7 +125,7 @@ public class TGS_CharSet {
             final private static String dim_other = ".";
             final private static String dim_turkish = ".";
 
-            public String dayOfWeekName(TGS_CharSet.CommonGwt.Language language, int dayOfWeek) {
+            public String dayOfWeekName(int dayOfWeek) {
                 if (TGS_CharSet.cmn().languageTurkish().equals(this)) {
                     return dayOfWeekName_turkish[dayOfWeek - 1];
                 }
