@@ -92,6 +92,7 @@ public class TGS_CharSet {
             @Override
             public int hashCode() {
                 int hash = 5;
+                hash = 71 * hash + Objects.hashCode(this.locale);
                 return hash;
             }
 
