@@ -118,10 +118,21 @@ public class TGS_CharSet {
 
             public String dim() {
                 if (TGS_CharSet.cmn().languageTurkish().equals(this)) {
-                    return ",";
+                    return dim_turkish;
                 }
-                return ".";
+                return dim_other;
             }
+            final private static String dim_other = ".";
+            final private static String dim_turkish = ".";
+
+            public String dayOfWeekName(TGS_CharSet.CommonGwt.Language language, int dayOfWeek) {
+                if (TGS_CharSet.cmn().languageTurkish().equals(this)) {
+                    return dayOfWeekName_turkish[dayOfWeek - 1];
+                }
+                return dayOfWeekName_other[dayOfWeek - 1];
+            }
+            final private static String[] dayOfWeekName_other = new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+            final private static String[] dayOfWeekName_turkish = new String[]{"Pazartesi", "Sali", "Carsamba", "Persembe", "Cuma", "Cumartesi", "Pazar"};
 
             //ISSUE: https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html#toLowerCase()
             public String toLowerCase(CharSequence source) {
