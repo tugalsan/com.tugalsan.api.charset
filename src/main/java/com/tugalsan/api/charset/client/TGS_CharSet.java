@@ -1,10 +1,8 @@
 package com.tugalsan.api.charset.client;
 
 import com.google.gwt.core.shared.GwtIncompatible;
-import com.google.gwt.i18n.client.LocaleInfo;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.Locale;
 import java.util.Objects;
 
 public class TGS_CharSet {
@@ -63,226 +61,17 @@ public class TGS_CharSet {
     //Common
     public static class Common extends CommonGwt {
 
-        @Override
-        @GwtIncompatible
-        public String localeName() {
-            return Locale.getDefault().getLanguage();
+        private Common() {
+            super();
         }
-        
-        @Override
-        @GwtIncompatible
-        public void languageSetDefault(Language languageDefault) {
-            Locale.setDefault(languageDefault.locale);
-            super.languageSetDefault(languageDefault);
-        }
+
     }
 
     //CommonGwt
     public static class CommonGwt {
 
-        public static class Language {
+        private CommonGwt() {
 
-            public Language(Locale locale) {
-                this.locale = locale;
-            }
-            final private Locale locale;
-
-            public static Language of(Locale locale) {
-                return new Language(locale);
-            }
-
-            @Override
-            public int hashCode() {
-                int hash = 5;
-                hash = 71 * hash + Objects.hashCode(this.locale);
-                return hash;
-            }
-
-            @Override
-            public boolean equals(Object obj) {
-                if (this == obj) {
-                    return true;
-                }
-                if (obj == null) {
-                    return false;
-                }
-                if (getClass() != obj.getClass()) {
-                    return false;
-                }
-                final Language other = (Language) obj;
-                return Objects.equals(this.locale, other.locale);
-            }
-
-            @Override
-            public String toString() {
-                return Language.class.getSimpleName() + "{" + "locale=" + locale + '}';
-            }
-
-            public String dim() {
-                if (TGS_CharSet.cmn().languageTurkish().equals(this)) {
-                    return dim_turkish;
-                }
-                return dim_other;
-            }
-            final private static String dim_other = ".";
-            final private static String dim_turkish = ".";
-
-            public String dayOfWeekName(int dayOfWeek) {
-                if (TGS_CharSet.cmn().languageTurkish().equals(this)) {
-                    return dayOfWeekName_turkish[dayOfWeek - 1];
-                }
-                return dayOfWeekName_other[dayOfWeek - 1];
-            }
-            final private static String[] dayOfWeekName_other = new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-            final private static String[] dayOfWeekName_turkish = new String[]{"Pazartesi", "Sali", "Carsamba", "Persembe", "Cuma", "Cumartesi", "Pazar"};
-
-            //ISSUE: https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html#toLowerCase()
-            public String toLowerCase(CharSequence source) {
-                return toLowerCase(source, false);
-            }
-
-            public String toLowerCase(CharSequence source, boolean removeHiddenLetters) {
-                if (removeHiddenLetters) {
-                    source = TGS_CharSet.cmn().removeHidden(source);
-                }
-                if (source == null) {
-                    return null;
-                }
-                return source.toString().toLowerCase(locale);
-            }
-
-            //ISSUE: https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html#toUpperCase()
-            public String toUpperCase(CharSequence source) {
-                return toUpperCase(source, false);
-            }
-
-            public String toUpperCase(CharSequence source, boolean removeHiddenLetters) {
-                if (removeHiddenLetters) {
-                    source = TGS_CharSet.cmn().removeHidden(source);
-                }
-                if (source == null) {
-                    return null;
-                }
-                return source.toString().toUpperCase(locale);
-            }
-
-            public boolean equalsIgnoreCase(CharSequence item0, CharSequence item1) {
-                return equalsIgnoreCase(item0, item1, true);
-            }
-
-            public boolean equalsIgnoreCase(CharSequence item0, CharSequence item1, boolean skipHiddenLetters) {
-                if (skipHiddenLetters) {
-                    item0 = TGS_CharSet.cmn().removeHidden(item0);
-                    item1 = TGS_CharSet.cmn().removeHidden(item1);
-                }
-                if (item0 == null && item1 == null) {
-                    return true;
-                }
-                if (item0 == null && item1 != null) {
-                    return false;
-                }
-                if (item0 != null && item1 == null) {
-                    return false;
-                }
-                return toUpperCase(item0, skipHiddenLetters).trim()
-                        .equals(toUpperCase(item1, skipHiddenLetters).trim());
-            }
-
-            public boolean containsIgnoreCase(CharSequence fullContent, CharSequence searchTag) {
-                return containsIgnoreCase(fullContent, searchTag, true);
-            }
-
-            public boolean containsIgnoreCase(CharSequence fullContent, CharSequence searchTag, boolean skipHiddenLetters) {
-                if (skipHiddenLetters) {
-                    fullContent = TGS_CharSet.cmn().removeHidden(fullContent);
-                    searchTag = TGS_CharSet.cmn().removeHidden(searchTag);
-                }
-                if (fullContent == null && searchTag == null) {
-                    return true;
-                }
-                if (fullContent == null && searchTag != null) {
-                    return false;
-                }
-                if (fullContent != null && searchTag == null) {
-                    return false;
-                }
-                return toUpperCase(fullContent, skipHiddenLetters).trim()
-                        .contains(toUpperCase(searchTag, skipHiddenLetters).trim());
-            }
-
-            public boolean endsWithIgnoreCase(CharSequence fullContent, CharSequence endsWithTag) {
-                return endsWithIgnoreCase(fullContent, endsWithTag, true);
-            }
-
-            public boolean endsWithIgnoreCase(CharSequence fullContent, CharSequence endsWithTag, boolean skipHiddenLetters) {
-                if (fullContent == null && endsWithTag == null) {
-                    return true;
-                }
-                if (fullContent == null && endsWithTag != null) {
-                    return false;
-                }
-                if (fullContent != null && endsWithTag == null) {
-                    return false;
-                }
-                return toUpperCase(fullContent, skipHiddenLetters).trim()
-                        .endsWith(toUpperCase(endsWithTag, skipHiddenLetters).trim());
-            }
-
-            public boolean startsWithIgnoreCase(CharSequence fullContent, CharSequence startsWithTag) {
-                return startsWithIgnoreCase(fullContent, startsWithTag, true);
-            }
-
-            public boolean startsWithIgnoreCase(CharSequence fullContent, CharSequence startsWithTag, boolean skipHiddenLetters) {
-                if (fullContent == null && startsWithTag == null) {
-                    return true;
-                }
-                if (fullContent == null && startsWithTag != null) {
-                    return false;
-                }
-                if (fullContent != null && startsWithTag == null) {
-                    return false;
-                }
-                return toUpperCase(fullContent, skipHiddenLetters).trim()
-                        .startsWith(toUpperCase(startsWithTag, skipHiddenLetters).trim());
-            }
-
-        }
-
-        public void languageSetDefault(Language languageDefault) {
-            CommonGwt.languageDefault = languageDefault;
-        }
-        private static volatile Language languageDefault = null;
-
-        public Language languageDefault() {
-            if (languageDefault == null) {
-                var tmp = localeTurkish() ? languageTurkish() : languageEnglish();
-                languageSetDefault(tmp);
-            }
-            return languageDefault;
-        }
-
-        public Language languageEnglish() {
-            if (languageEnglish == null) {
-                languageEnglish = new Language(Locale.ENGLISH);
-            }
-            return languageEnglish;
-        }
-        private static volatile Language languageEnglish = null;
-
-        public Language languageTurkish() {
-            if (languageTurkish == null) {
-                languageTurkish = new Language(Locale.of("tr", "TR"));
-            }
-            return languageTurkish;
-        }
-        private static volatile Language languageTurkish = null;
-
-        public String localeName() {
-            return LocaleInfo.getCurrentLocale().getLocaleName();
-        }
-
-        public boolean localeTurkish() {
-            return localeName().contains("tr");//"default" ?
         }
 
         //    public static String ISO_TURKISH() {return "ISO_8859_9";}
