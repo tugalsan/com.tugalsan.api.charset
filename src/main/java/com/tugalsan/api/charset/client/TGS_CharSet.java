@@ -10,16 +10,16 @@ import java.util.Objects;
 public class TGS_CharSet {
 
     //UserHappy
-    public static CommonCombined cmn() {
-        return of().cmn;
+    public static Common cmn() {
+        return memoryHappy().cmn;
     }
 
-    public static OnlyJre jre() {
-        return of().jre;
+    public static OnlyJreHappy jre() {
+        return memoryHappy().jre;
     }
 
     //MemoryHappy
-    private static TGS_CharSet of() {
+    private static TGS_CharSet memoryHappy() {
         if (holder == null) {
             holder = new TGS_CharSet();
         }
@@ -30,11 +30,11 @@ public class TGS_CharSet {
     private TGS_CharSet() {
 
     }
-    final public CommonCombined cmn = new CommonCombined();
-    final public OnlyJre jre = new OnlyJre();
+    final public Common cmn = new Common();
+    final public OnlyJreHappy jre = new OnlyJreHappy();
 
     //OnlyJREHappy
-    public static class OnlyJre {
+    public static class OnlyJreHappy {
 
         @GwtIncompatible
         public static void setDefaultLocaleToTurkish() {
@@ -65,8 +65,8 @@ public class TGS_CharSet {
         }
     }
 
-    //JREHappy
-    protected static class CommonCombined extends CommonGwt {
+    //Common
+    protected static class Common extends CommonGwt {
 
         @Override
         @GwtIncompatible
@@ -75,7 +75,7 @@ public class TGS_CharSet {
         }
     }
 
-    //GWTHappy
+    //CommonGwt
     protected static class CommonGwt {
 
         public String localeName() {
