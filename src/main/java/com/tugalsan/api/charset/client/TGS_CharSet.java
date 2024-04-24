@@ -66,7 +66,7 @@ public class TGS_CharSet {
     }
 
     //Common
-    protected static class Common extends CommonGwt {
+    public static class Common extends CommonGwt {
 
         @Override
         @GwtIncompatible
@@ -76,7 +76,7 @@ public class TGS_CharSet {
     }
 
     //CommonGwt
-    protected static class CommonGwt {
+    public static class CommonGwt {
 
         public String localeName() {
             return LocaleInfo.getCurrentLocale().getLocaleName();
