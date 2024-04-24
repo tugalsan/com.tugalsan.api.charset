@@ -7,7 +7,11 @@ public class TGS_CharSetCast {
 
     //UserHappy
     public static Common current() {
-        if (TGS_CharSetLocale.cmn().currentTypeGet() == TGS_CharSetLocaleTypes.TURKISH) {
+        return typed(TGS_CharSetLocale.cmn().currentTypeGet());
+    }
+
+    public static Common typed(TGS_CharSetLocaleTypes type) {
+        if (type == TGS_CharSetLocaleTypes.TURKISH) {
             return turkish();
         }
         return english();
