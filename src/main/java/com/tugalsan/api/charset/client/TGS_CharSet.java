@@ -111,6 +111,11 @@ public class TGS_CharSet {
                 return Objects.equals(this.locale, other.locale);
             }
 
+            @Override
+            public String toString() {
+                return Language.class.getSimpleName() + "{" + "locale=" + locale + '}';
+            }
+
             public String dim() {
                 if (TGS_CharSet.cmn().languageTurkish().equals(this)) {
                     return ",";
