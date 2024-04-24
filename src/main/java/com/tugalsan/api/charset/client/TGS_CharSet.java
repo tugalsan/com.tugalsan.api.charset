@@ -68,6 +68,13 @@ public class TGS_CharSet {
         public String localeName() {
             return Locale.getDefault().getLanguage();
         }
+        
+        @Override
+        @GwtIncompatible
+        public void languageSetDefault(Language languageDefault) {
+            Locale.setDefault(languageDefault.locale);
+            super.languageSetDefault(languageDefault);
+        }
     }
 
     //CommonGwt
@@ -243,7 +250,6 @@ public class TGS_CharSet {
 
         public void languageSetDefault(Language languageDefault) {
             CommonGwt.languageDefault = languageDefault;
-            Locale.setDefault(languageDefault.locale);
         }
         private static volatile Language languageDefault = null;
 
