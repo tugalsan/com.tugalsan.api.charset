@@ -121,7 +121,7 @@ public class TGS_CharSet {
             return "█"; // // U+2588 Unicode Character
         }
 
-        final public String UTF8 = "UTF-8";
+        final public static String UTF8 = "UTF-8";//TS_SCharSetWebFilterUTF8 needs is static
 //    public  String UTF8_StandardCharsets() {return StandardCharsets.UTF_8.name();}//STATIC NEEDED FOR TGS_CharSetWebFilter
 //    public  String UTF8_OS (){return  Charset.defaultCharset().name();}//GWT does not like u; check on 2.10 version again!
 
