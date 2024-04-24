@@ -27,7 +27,7 @@ public class TGS_CharSetCast {
             return null;
         }
         return LOCALE2CAST == Locale2Cast.TURKISH
-                ? source.toString().toLowerCase(Locale.ROOT)
+                ? source.toString().toLowerCase(Locale.forLanguageTag("tr-TR"))
                 : source.toString().toLowerCase();
     }
 
@@ -44,7 +44,7 @@ public class TGS_CharSetCast {
             return null;
         }
         return LOCALE2CAST == Locale2Cast.TURKISH
-                ? source.toString().toUpperCase(Locale.ROOT)
+                ? source.toString().toUpperCase(Locale.forLanguageTag("tr-TR"))
                 : source.toString().toUpperCase();
     }
 
