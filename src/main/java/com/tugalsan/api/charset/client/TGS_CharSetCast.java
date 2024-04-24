@@ -1,6 +1,5 @@
 package com.tugalsan.api.charset.client;
 
-import java.nio.charset.Charset;
 import java.util.Locale;
 
 public class TGS_CharSetCast {
@@ -22,7 +21,7 @@ public class TGS_CharSetCast {
 
     public static String toLocaleLowerCase(CharSequence source, boolean removeHiddenLetters) {
         if (removeHiddenLetters) {
-            source = removeHidden(source);
+            source = TGS_CharSet.cmn().removeHidden(source);
         }
         if (source == null) {
             return null;
@@ -39,7 +38,7 @@ public class TGS_CharSetCast {
 
     public static String toLocaleUpperCase(CharSequence source, boolean removeHiddenLetters) {
         if (removeHiddenLetters) {
-            source = removeHidden(source);
+            source = TGS_CharSet.cmn().removeHidden(source);
         }
         if (source == null) {
             return null;
@@ -55,8 +54,8 @@ public class TGS_CharSetCast {
 
     public static boolean equalsLocaleIgnoreCase(CharSequence item0, CharSequence item1, boolean skipHiddenLetters) {
         if (skipHiddenLetters) {
-            item0 = removeHidden(item0);
-            item1 = removeHidden(item1);
+            item0 = TGS_CharSet.cmn().removeHidden(item0);
+            item1 = TGS_CharSet.cmn().removeHidden(item1);
         }
         if (item0 == null && item1 == null) {
             return true;
@@ -77,8 +76,8 @@ public class TGS_CharSetCast {
 
     public static boolean containsLocaleIgnoreCase(CharSequence fullContent, CharSequence searchTag, boolean skipHiddenLetters) {
         if (skipHiddenLetters) {
-            fullContent = removeHidden(fullContent);
-            searchTag = removeHidden(searchTag);
+            fullContent = TGS_CharSet.cmn().removeHidden(fullContent);
+            searchTag = TGS_CharSet.cmn().removeHidden(searchTag);
         }
         if (fullContent == null && searchTag == null) {
             return true;
@@ -129,21 +128,4 @@ public class TGS_CharSetCast {
                 .startsWith(toLocaleUpperCase(startsWithTag, skipHiddenLetters).trim());
     }
 
-    public static String to(CharSequence source, Charset sourceCharset, Charset destCharset) {
-        return to(source, sourceCharset, destCharset, false);
-    }
-
-    public static String to(CharSequence source, Charset sourceCharset, Charset destCharset, boolean removeHiddenLetters) {
-        if (removeHiddenLetters) {
-            source = removeHidden(source);
-        }
-        return new String(source.toString().getBytes(sourceCharset), destCharset);
-    }
-
-    public static String removeHidden(CharSequence text) {
-        if (text == null) {
-            return null;
-        }
-        return text.toString().replace("\n", "").replace("\r", "").replaceAll("\\p{C}", "?");
-    }
 }
