@@ -89,6 +89,34 @@ public class TGS_CharSet {
                 return new Language(locale);
             }
 
+            @Override
+            public int hashCode() {
+                int hash = 5;
+                return hash;
+            }
+
+            @Override
+            public boolean equals(Object obj) {
+                if (this == obj) {
+                    return true;
+                }
+                if (obj == null) {
+                    return false;
+                }
+                if (getClass() != obj.getClass()) {
+                    return false;
+                }
+                final Language other = (Language) obj;
+                return Objects.equals(this.locale, other.locale);
+            }
+
+            public String dim() {
+                if (TGS_CharSet.cmn().languageTurkish().equals(this)) {
+                    return ",";
+                }
+                return ".";
+            }
+
             //ISSUE: https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html#toLowerCase()
             public String toLowerCase(CharSequence source) {
                 return toLowerCase(source, false);
