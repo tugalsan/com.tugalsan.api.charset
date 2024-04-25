@@ -149,9 +149,9 @@ public class TGS_CharSetCast {
                 return null;
             }
             if (localType == TGS_CharSetLocaleTypes.TURKISH) {
-                return source.toString().toLowerCase(Locale.ROOT);
+                return source.toString().toUpperCase(Locale.ROOT);
             }
-            return source.toString().toLowerCase(Locale.ENGLISH);
+            return source.toString().toUpperCase(Locale.ENGLISH);
         }
 
         public boolean equalsIgnoreCase(CharSequence item0, CharSequence item1) {
