@@ -50,7 +50,7 @@ public class TGS_CharSetCast {
         @Override
         protected void init() {
             if (localType == TGS_CharSetLocaleTypes.TURKISH) {
-                locale = Locale.of("tr");
+                locale = Locale.ROOT;//Locale.of("tr");
                 return;
             }
             locale = Locale.ENGLISH;
