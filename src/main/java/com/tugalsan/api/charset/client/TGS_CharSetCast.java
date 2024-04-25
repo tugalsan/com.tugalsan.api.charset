@@ -1,10 +1,11 @@
 package com.tugalsan.api.charset.client;
 
 import com.google.gwt.core.shared.GwtIncompatible;
+import com.google.gwt.i18n.client.LocaleInfo;
 import java.util.Locale;
 
 public class TGS_CharSetCast {
-    
+
     //UserHappy
     public static Common current() {
         return typed(TGS_CharSetLocale.cmn().currentTypeGet());
@@ -131,7 +132,11 @@ public class TGS_CharSetCast {
                 return null;
             }
             if (localType == TGS_CharSetLocaleTypes.TURKISH) {
-                return source.toString().toLowerCase(Locale.ROOT);
+                if (LocaleInfo.getCurrentLocale().getLocaleName().contains("tr")) {
+                    return source.toString().toLowerCase();
+                } else {
+                    return source.toString().toLowerCase(Locale.ROOT);
+                }
             }
             return source.toString().toLowerCase(Locale.ENGLISH);
         }
@@ -149,7 +154,11 @@ public class TGS_CharSetCast {
                 return null;
             }
             if (localType == TGS_CharSetLocaleTypes.TURKISH) {
-                return source.toString().toUpperCase(Locale.ROOT);
+                if (LocaleInfo.getCurrentLocale().getLocaleName().contains("tr")) {
+                    return source.toString().toUpperCase();
+                } else {
+                    return source.toString().toUpperCase(Locale.ROOT);
+                }
             }
             return source.toString().toUpperCase(Locale.ENGLISH);
         }
