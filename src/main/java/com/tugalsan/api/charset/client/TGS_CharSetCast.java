@@ -4,7 +4,7 @@ import com.google.gwt.core.shared.GwtIncompatible;
 import java.util.Locale;
 
 public class TGS_CharSetCast {
-    
+
     //UserHappy
     public static Common current() {
         return typed(TGS_CharSetLocale.cmn().currentTypeGet());
@@ -92,13 +92,12 @@ public class TGS_CharSetCast {
     public static class CommonGwt {
 
         private CommonGwt(TGS_CharSetLocaleTypes localType) {
-            this.localType = localType;
             init();
         }
         final public TGS_CharSetLocaleTypes localType;
 
         protected void init() {
-
+            this.localType = localType;
         }
 
         public String dim() {
