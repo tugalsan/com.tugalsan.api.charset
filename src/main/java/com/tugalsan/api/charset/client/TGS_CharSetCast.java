@@ -4,7 +4,7 @@ import com.google.gwt.core.shared.GwtIncompatible;
 import java.util.Locale;
 
 public class TGS_CharSetCast {
-
+    
     //UserHappy
     public static Common current() {
         return typed(TGS_CharSetLocale.cmn().currentTypeGet());
@@ -49,7 +49,6 @@ public class TGS_CharSetCast {
         @GwtIncompatible
         @Override
         protected void init() {
-            super.init();
             if (localType == TGS_CharSetLocaleTypes.TURKISH) {
                 locale = Locale.of("tr", "TR");
                 return;
@@ -92,12 +91,13 @@ public class TGS_CharSetCast {
     public static class CommonGwt {
 
         private CommonGwt(TGS_CharSetLocaleTypes localType) {
+            this.localType = localType;
             init();
         }
         final public TGS_CharSetLocaleTypes localType;
 
         protected void init() {
-            this.localType = localType;
+
         }
 
         public String dim() {
