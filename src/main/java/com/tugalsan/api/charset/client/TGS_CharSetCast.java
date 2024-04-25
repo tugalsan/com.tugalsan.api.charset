@@ -49,6 +49,7 @@ public class TGS_CharSetCast {
         @GwtIncompatible
         @Override
         protected void init() {
+            super.init();
             if (localType == TGS_CharSetLocaleTypes.TURKISH) {
                 locale = Locale.of("tr", "TR");
                 return;
