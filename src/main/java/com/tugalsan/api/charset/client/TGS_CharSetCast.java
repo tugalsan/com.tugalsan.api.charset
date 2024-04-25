@@ -22,7 +22,7 @@ public class TGS_CharSetCast {
     }
 
     public static Common turkish() {
-        return memoryHappy().english;
+        return memoryHappy().turkish;
     }
 
     //MemoryHappy
