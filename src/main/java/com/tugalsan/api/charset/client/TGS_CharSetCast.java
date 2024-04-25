@@ -119,7 +119,6 @@ public class TGS_CharSetCast {
         final private static String[] dayOfWeekName_other = new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
         final private static String[] dayOfWeekName_turkish = new String[]{"Pazartesi", "Sali", "Carsamba", "Persembe", "Cuma", "Cumartesi", "Pazar"};
 
-        //ISSUE: https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html#toLowerCase()
         public String toLowerCase(CharSequence source) {
             return toLowerCase(source, false);
         }
@@ -132,16 +131,20 @@ public class TGS_CharSetCast {
                 return null;
             }
             if (localType == TGS_CharSetLocaleTypes.TURKISH) {
-                if (LocaleInfo.getCurrentLocale().getLocaleName().contains("tr")) {
-                    return source.toString().toLowerCase();
-                } else {
-                    return source.toString().toLowerCase(Locale.ROOT);
-                }
+//                if (LocaleInfo.getCurrentLocale().getLocaleName().contains("tr")) {
+//                    return source.toString().toLowerCase();
+//                } else {
+//                    return source.toString().toLowerCase(Locale.ROOT);
+//                }
+                return turkish_toLowerCase(source.toString());
             }
             return source.toString().toLowerCase(Locale.ENGLISH);
         }
 
-        //ISSUE: https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/lang/String.html#toUpperCase()
+        private native String turkish_toLowerCase(String source) /*-{
+            return source.toLocaleLowerCase('tr-TR');
+        }-*/;
+
         public String toUpperCase(CharSequence source) {
             return toUpperCase(source, false);
         }
@@ -154,14 +157,19 @@ public class TGS_CharSetCast {
                 return null;
             }
             if (localType == TGS_CharSetLocaleTypes.TURKISH) {
-                if (LocaleInfo.getCurrentLocale().getLocaleName().contains("tr")) {
-                    return source.toString().toUpperCase();
-                } else {
-                    return source.toString().toUpperCase(Locale.ROOT);
-                }
+//                if (LocaleInfo.getCurrentLocale().getLocaleName().contains("tr")) {
+//                    return source.toString().toUpperCase();
+//                } else {
+//                    return source.toString().toUpperCase(Locale.ROOT);
+//                }
+                return turkish_toUpperCase(source.toString());
             }
             return source.toString().toUpperCase(Locale.ENGLISH);
         }
+
+        private native String turkish_toUpperCase(String source) /*-{
+            return source.toLocaleUpperCase('tr-TR');
+        }-*/;
 
         public boolean equalsIgnoreCase(CharSequence item0, CharSequence item1) {
             return equalsIgnoreCase(item0, item1, true);
