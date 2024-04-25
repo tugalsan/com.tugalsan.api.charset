@@ -7,6 +7,8 @@ import java.util.Locale;
 
 public class TGS_CharSetLocale {
 
+    public static boolean FORCE_DEFAULT_TO_TURKISH_ON_INIT = true;
+
     //UserHappy
     public static Common cmn() {
         return memoryHappy().cmn;
@@ -33,11 +35,15 @@ public class TGS_CharSetLocale {
         @GwtIncompatible
         public TGS_CharSetLocaleTypes currentTypeGet() {
             if (currentType == null) {
-                var tmp = Locale.getDefault().getLanguage();
-                if (tmp.contains("tr")) {
-                    currentType = TGS_CharSetLocaleTypes.TURKISH;
+                if (FORCE_DEFAULT_TO_TURKISH_ON_INIT) {
+                    currentTypeSet(TGS_CharSetLocaleTypes.TURKISH);
                 } else {
-                    currentType = TGS_CharSetLocaleTypes.ENGLISH;
+                    var tmp = Locale.getDefault().getLanguage();
+                    if (tmp.contains("tr")) {
+                        currentType = TGS_CharSetLocaleTypes.TURKISH;
+                    } else {
+                        currentType = TGS_CharSetLocaleTypes.ENGLISH;
+                    }
                 }
             }
             return currentType;
@@ -48,7 +54,7 @@ public class TGS_CharSetLocale {
         public void currentTypeSet(TGS_CharSetLocaleTypes currentType) {
             super.currentTypeSet(currentType);
             if (currentType == TGS_CharSetLocaleTypes.TURKISH) {
-                Locale.setDefault(Locale.of("tr"));
+                Locale.setDefault(Locale.of("tr", "TR"));
                 return;
             }
             Locale.setDefault(Locale.ENGLISH);
@@ -60,11 +66,15 @@ public class TGS_CharSetLocale {
 
         public TGS_CharSetLocaleTypes currentTypeGet() {
             if (currentType == null) {
-                var tmp = LocaleInfo.getCurrentLocale().getLocaleName();
-                if (tmp.contains("tr")) {
-                    currentType = TGS_CharSetLocaleTypes.TURKISH;
+                if (FORCE_DEFAULT_TO_TURKISH_ON_INIT) {
+                    currentTypeSet(TGS_CharSetLocaleTypes.TURKISH);
                 } else {
-                    currentType = TGS_CharSetLocaleTypes.ENGLISH;
+                    var tmp = LocaleInfo.getCurrentLocale().getLocaleName();
+                    if (tmp.contains("tr")) {
+                        currentType = TGS_CharSetLocaleTypes.TURKISH;
+                    } else {
+                        currentType = TGS_CharSetLocaleTypes.ENGLISH;
+                    }
                 }
             }
             return currentType;
