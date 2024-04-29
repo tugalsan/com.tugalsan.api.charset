@@ -1,7 +1,6 @@
 package com.tugalsan.api.charset.client;
 
 import com.google.gwt.core.shared.GwtIncompatible;
-import com.google.gwt.i18n.client.LocaleInfo;
 import java.util.Locale;
 
 public class TGS_CharSetCast {
