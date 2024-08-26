@@ -109,11 +109,11 @@ public class TGS_CharSetCast {
         final private static String dim_other = ".";
         final private static String dim_turkish = ".";
 
-        public String dayOfWeekName(int dayOfWeek) {
+        public String dayOfWeekName(int dayOfWeek_from_1_to_7) {
             if (localType == TGS_CharSetLocaleTypes.TURKISH) {
-                return dayOfWeekName_turkish[dayOfWeek - 1];
+                return dayOfWeekName_turkish[dayOfWeek_from_1_to_7 - 1];
             }
-            return dayOfWeekName_other[dayOfWeek - 1];
+            return dayOfWeekName_other[dayOfWeek_from_1_to_7 - 1];
         }
         final private static String[] dayOfWeekName_other = new String[]{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
         final private static String[] dayOfWeekName_turkish = new String[]{"Pazartesi", "Sali", "Carsamba", "Persembe", "Cuma", "Cumartesi", "Pazar"};
