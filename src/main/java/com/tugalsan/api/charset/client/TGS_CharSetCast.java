@@ -182,10 +182,10 @@ public class TGS_CharSetCast {
             if (item0 == null && item1 == null) {
                 return true;
             }
-            if (item0 == null && item1 != null) {
+            if (item0 == null) {
                 return false;
             }
-            if (item0 != null && item1 == null) {
+            if (item1 == null) {
                 return false;
             }
             return toUpperCase(item0, skipHiddenLetters).trim()
@@ -204,10 +204,10 @@ public class TGS_CharSetCast {
             if (fullContent == null && searchTag == null) {
                 return true;
             }
-            if (fullContent == null && searchTag != null) {
+            if (fullContent == null) {
                 return false;
             }
-            if (fullContent != null && searchTag == null) {
+            if (searchTag == null) {
                 return false;
             }
             return toUpperCase(fullContent, skipHiddenLetters).trim()
@@ -222,10 +222,10 @@ public class TGS_CharSetCast {
             if (fullContent == null && endsWithTag == null) {
                 return true;
             }
-            if (fullContent == null && endsWithTag != null) {
+            if (fullContent == null) {
                 return false;
             }
-            if (fullContent != null && endsWithTag == null) {
+            if (endsWithTag == null) {
                 return false;
             }
             return toUpperCase(fullContent, skipHiddenLetters).trim()
@@ -240,10 +240,10 @@ public class TGS_CharSetCast {
             if (fullContent == null && startsWithTag == null) {
                 return true;
             }
-            if (fullContent == null && startsWithTag != null) {
+            if (fullContent == null) {
                 return false;
             }
-            if (fullContent != null && startsWithTag == null) {
+            if (startsWithTag == null) {
                 return false;
             }
             return toUpperCase(fullContent, skipHiddenLetters).trim()
